@@ -28,7 +28,7 @@
       <span *ngIf="!isContacting">Contact cohort</span>
     </button>
 
-    <p-dialog header="Contact Cohort" [(visible)="isContacting"]>
+    <p-dialog header="Contact Cohort" [(visible)]="isContacting">
       <textarea pInputTextArea [(ngModel)]="contactSynopsis"></textarea>
       <p-footer>
         <button type="button" (click)="contact($event)" class="btn btn-outline-primary btn-sm"></button>
