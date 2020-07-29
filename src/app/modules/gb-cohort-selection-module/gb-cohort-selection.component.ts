@@ -79,6 +79,10 @@ export class GbCohortSelectionComponent implements OnInit {
     return this.cohortService.isContacting;
   }
 
+  set isContacting(val: boolean) {
+    this.cohortService.isContacting = false;
+  }
+
   get contactSynopsis(): string {
     return this.cohortService.contactSynopsis;
   }
@@ -122,7 +126,7 @@ export class GbCohortSelectionComponent implements OnInit {
         'You\'ve contacted all members of this cohort previously.',
         '',
         );
-      this.cohortService.isContacting = false;
+      this.isContacting = false;
       return;
     }
     MessageHelper.alert(
@@ -130,7 +134,7 @@ export class GbCohortSelectionComponent implements OnInit {
       `Contacted ${result.contactCount - result.previousContactCount} new patients`,
       '',
     );
-    this.cohortService.isContacting = false;
+    this.isContacting = false;
   }
 
   showContactModal($event) {
