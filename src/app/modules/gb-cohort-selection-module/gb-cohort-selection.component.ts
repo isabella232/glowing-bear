@@ -117,7 +117,6 @@ export class GbCohortSelectionComponent implements OnInit {
   }
 
   async contact(event) {
-    event.stopPropgation();
     // TODO: fetch the synopsis
     const result = await this.cohortService.contactCohort();
     if (result.previouslyContacted && result.contactCount === result.previousContactCount) {
@@ -137,8 +136,7 @@ export class GbCohortSelectionComponent implements OnInit {
     this.isContacting = false;
   }
 
-  showContactModal($event) {
-    event.stopPropagation();
+  showContactModal(event) {
     this.cohortService.isContacting = true;
   }
 }
