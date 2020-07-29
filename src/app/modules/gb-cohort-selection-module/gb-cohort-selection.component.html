@@ -28,8 +28,13 @@
       <span *ngIf="!isContacting">Contact cohort</span>
     </button>
 
-    <p-dialog header="Contact Cohort" [(visible)]="isContacting">
-      <textarea pInputTextArea [(ngModel)]="contactSynopsis"></textarea>
+    <p-dialog modal="true" header="Contact Cohort" [(visible)]="isContacting"
+      [style]="{width: '30vw'}"
+    >
+      <span class="ui-float-label">
+        <textarea id="float-input" pInputTextArea [(ngModel)]="contactSynopsis"></textarea>
+        <label for="float-input">Study Synopsis</label>
+      </span>
       <p-footer>
         <button type="button" (click)="contact($event)" class="btn btn-outline-primary btn-sm">
           Contact
