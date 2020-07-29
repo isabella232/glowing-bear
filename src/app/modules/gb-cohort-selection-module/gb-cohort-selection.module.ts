@@ -20,6 +20,7 @@ import {AutoCompleteModule} from 'primeng/components/autocomplete/autocomplete';
 import {Md2AccordionModule} from 'md2';
 import {CheckboxModule} from 'primeng/components/checkbox/checkbox';
 import {CalendarModule} from 'primeng/components/calendar/calendar';
+import {DialogModule} from 'primeng/dialog';
 import {
   PanelModule,
   DataListModule,
@@ -51,6 +52,7 @@ import {GbPedigreeConstraintComponent} from './constraint-components/gb-pedigree
     InputSwitchModule,
     DropdownModule,
     ListboxModule,
+    DialogModule,
   ],
   exports: [
     RouterModule

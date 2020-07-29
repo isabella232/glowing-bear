@@ -21,6 +21,19 @@
       <span *ngIf="!isUpdating">Update cohort</span>
     </button>
 
+    <button type="button"
+            (click)="showContactModal($event)"
+            class="btn btn-outline-seconday btn-sm contact-btn">
+      <span *ngIf="isContacting">Contacting cohort...</span>
+      <span *ngIf="!isContacting">Contact cohort</span>
+    </button>
+
+    <p-dialog header="Contact Cohort" [(visible)="isContacting"]>
+      <textarea pInputTextArea [(ngModel)]="contactSynopsis"></textarea>
+      <p-footer>
+        <button type="button" (click)="contact($event)" class="btn btn-outline-primary btn-sm"></button>
+      </p-footer>
+    </p-dialog>
 
   </div>
 

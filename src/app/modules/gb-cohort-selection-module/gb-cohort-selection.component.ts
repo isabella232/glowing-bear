@@ -75,6 +75,18 @@ export class GbCohortSelectionComponent implements OnInit {
     return this.cohortService.isDirty;
   }
 
+  get isContacting(): boolean {
+    return this.cohortService.isContacting;
+  }
+
+  get contactSynopsis(): string {
+    return this.cohortService.contactSynopsis;
+  }
+
+  set contactSynopsis(value: string) {
+    this.cohortService.contactSynopsis = value;
+  }
+
   /**
    * Prevent the default behavior of node drop
    * @param event
@@ -100,4 +112,29 @@ export class GbCohortSelectionComponent implements OnInit {
     this.cohortService.updateCountsWithCurrentCohort();
   }
 
+  async contact(event) {
+    event.stopPropgation();
+    // TODO: fetch the synopsis
+    const result = await this.cohortService.contactCohort();
+    if (result.previouslyContacted && result.contactCount === result.previousContactCount) {
+      MessageHelper.alert(
+        'error',
+        'You\'ve contacted all members of this cohort previously.',
+        '',
+        );
+      this.cohortService.isContacting = false;
+      return;
+    }
+    MessageHelper.alert(
+      'info',
+      `Contacted ${result.contactCount - result.previousContactCount} new patients`,
+      '',
+    );
+    this.cohortService.isContacting = false;
+  }
+
+  showContactModal($event) {
+    event.stopPropagation();
+    this.cohortService.isContacting = true;
+  }
 }

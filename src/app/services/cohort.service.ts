@@ -44,6 +44,10 @@ export class CohortService {
   private _currentCohort: Cohort;
   // The list of cohorts saved by the user
   private _cohorts: Cohort[] = [];
+  // flag indicating if the current cohort is being contacted
+  private _isContacting = false;
+  // Synopsis of the current study
+  private _contactSynopsis = '';
   // flag indicating if the current cohort is being updated (gb-cohort-selection)
   private _isUpdatingCurrent = false;
   // flag indicating if all the cohorts are being updated (gb-cohorts)
@@ -77,6 +81,12 @@ export class CohortService {
     this.loadCohorts();
     // initial updates
     this.updateCountsWithCurrentCohort();
+  }
+
+  public contactCohort(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.resourceService.contactCohort(this.currentCohort.constraint);
+    })
   }
 
   /**
@@ -396,6 +406,22 @@ export class CohortService {
 
   set currentCohort(value: Cohort) {
     this._currentCohort = value;
+  }
+
+  get isContacting() {
+    return this._isContacting;
+  }
+
+  set isContacting(value: boolean) {
+    this._isContacting = value;
+  }
+
+  get contactSynopsis() {
+    return this._contactSynopsis;
+  }
+
+  set contactSynopsis(value: string) {
+    this._contactSynopsis = value;
   }
 
   get isDirty(): boolean {

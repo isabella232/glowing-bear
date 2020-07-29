@@ -301,6 +301,11 @@ export class ResourceService {
   }
 
   // -------------------------------------- cohort calls --------------------------------------
+
+  contactCohort(constraint: Constraint): Observable<boolean> {
+    return this.transmartResourceService.contactCohort(constraint)
+  }
+
   /**
    * Get the queries that the current user has saved.
    * @returns {Observable<CohortRepresentation[]>}

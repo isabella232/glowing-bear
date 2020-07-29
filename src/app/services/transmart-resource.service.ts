@@ -566,4 +566,10 @@ export class TransmartResourceService {
       }));
   }
 
+  // -------------------------------------- contact cohort ---------------------------------------------
+
+  contactCohort(constraint: Constraint): Observable<boolean> {
+    return this.transmartHttpService.contactCohort(constraint)
+  }
+
 }

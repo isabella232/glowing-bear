@@ -463,4 +463,11 @@ export class TransmartHttpService {
     return this.httpHelper.postCall(urlPart, null, responseField);
   }
 
+  // -------------------------------------- contact cohort --------------------------------------
+  contactCohort(constraint: Constraint): Observable<boolean> {
+    const urlPart = 'contact';
+    const body = {constraint: TransmartConstraintMapper.mapConstraint(constraint)};
+    return this.httpHelper.postCall(urlPart, body, null);
+  }
+
 }
