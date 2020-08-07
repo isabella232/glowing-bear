@@ -34,12 +34,14 @@ export class GbCohortsComponent implements OnInit {
   searchTerm = '';
   isUploadListenerNotAdded: boolean;
   file: File; // holds the uploaded cohort file
+  contactSynopsis: string;
 
   constructor(private cohortService: CohortService,
               private countService: CountService,
               private element: ElementRef,
               private confirmationService: ConfirmationService) {
     this.isUploadListenerNotAdded = true;
+    this.contactSynopsis = '';
   }
 
   ngOnInit() {
@@ -258,5 +260,33 @@ export class GbCohortsComponent implements OnInit {
       '...' : FormatHelper.formatCountNumber(count);
     let noun = count === 1 ? 'subject' : 'subjects';
     return 'Total ' + countString + ' ' + noun + ' in selected cohort(s)';
+  }
+
+  get isContacting(): boolean {
+    return this.cohortService.isContacting;
+  }
+
+  set isContacting(val: boolean) {
+    this.cohortService.isContacting = false;
+  }
+
+  get cohortToContact(): Cohort {
+    return this.cohortService.cohortToContact;
+  }
+
+  set cohortToContact(value: Cohort) {
+    this.cohortService.cohortToContact = value;
+  }
+
+  contact($event: Event) {
+    $event.stopPropagation();
+    this.cohortService.contactCohort(this.cohortToContact, this.contactSynopsis);
+  }
+
+  showContactModal($event: Event, cohort) {
+    $event.stopPropagation();
+    $event.preventDefault();
+    this.cohortService.isContacting = true;
+    this.cohortToContact = cohort;
   }
 }

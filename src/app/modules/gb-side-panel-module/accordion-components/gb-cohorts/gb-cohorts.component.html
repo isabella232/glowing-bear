@@ -95,6 +95,11 @@
                         icon="{{getBookmarkButtonIcon(cohort)}}">
                 </button>
                 <button pButton class="ui-button-secondary" type="button"
+                        pTooltip="Contact" tooltipPosition="top" placeholder="Top"
+                        (click)="showContactModal($event, cohort)"
+                        icon="fa fa-users">
+                </button>
+                <button pButton class="ui-button-secondary" type="button"
                         pTooltip="Download this cohort for sharing/importing"
                         tooltipPosition="top" placeholder="Top"
                         (click)="downloadCohort($event, cohort)"
@@ -178,5 +183,23 @@
       </md2-accordion-tab>
     </md2-accordion>
   </div>
-
+  <p-dialog modal="true" header="Contact Cohort" [(visible)]="isContacting" [width]="600">
+    <br>
+    <div *ngIf="cohortToContact !== null && cohortToContact.contactResponse === null">
+      <textarea id="float-input" placeholder="Study Synopsis" pInputTextArea [(ngModel)]="contactSynopsis"></textarea>
+      <p-footer>
+        <button type="button" (click)="contact($event)" class="btn btn-outline-primary btn-sm">
+          Contact
+        </button>
+      </p-footer>
+    </div>
+    <div *ngIf="cohortToContact !== null && cohortToContact.contactResponse !== null">
+      <textarea id="float-input" disabled placeholder="Study Synopsis" [value]="cohortToContact.contactResponse.synopsis" pInputTextArea></textarea>
+      <p-footer>
+        <button type="button" disabled (click)="contact($event)" class="btn btn-outline-primary btn-sm">
+          Contact
+        </button>
+      </p-footer>
+    </div>
+  </p-dialog>
 </div>

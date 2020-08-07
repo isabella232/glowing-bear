@@ -72,6 +72,23 @@ export class HttpHelper {
   }
 
   /**
+   * Make a get http request
+   * @param urlPart - the part used in baseUrl/urlPart
+   * @param responseField
+   * @returns {Observable<any | any>}
+   */
+  public getCallWithoutErrorCatch(urlPart, responseField) {
+    const url = `${this.endpointUrl}/${urlPart}`;
+    if (responseField) {
+      return this.http.get(url).pipe(
+        map((res) => res[responseField]),
+      );
+    } else {
+      return this.http.get(url);
+    }
+  }
+
+  /**
    * Make a put http request
    * @param urlPart
    * @param body

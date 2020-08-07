@@ -184,3 +184,8 @@ body .hline {
   background-color: var(--gb-clinical-green) !important;
   color: #ffffff !important;
 }
+
+#float-input {
+  width: 100%;
+  min-height: 200px;
+}

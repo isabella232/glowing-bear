@@ -25,6 +25,7 @@ import {CountService} from './count.service';
 import {SubjectSetConstraint} from '../models/constraint-models/subject-set-constraint';
 import {SubjectSet} from '../models/constraint-models/subject-set';
 import {Constraint} from '../models/constraint-models/constraint';
+import { ContactResponse } from 'app/models/cohort-models/cohort-contact-response';
 
 /**
  * This service concerns with
@@ -69,6 +70,7 @@ export class CohortService {
   private _isCohortSubscriptionIncluded = false;
   // Flag indicating if saving a cohort is finished
   private _isSavingCohortCompleted = true;
+  private _cohortToContact: Cohort = null;
 
   constructor(private appConfig: AppConfig,
               private resourceService: ResourceService,
@@ -83,10 +85,16 @@ export class CohortService {
     this.updateCountsWithCurrentCohort();
   }
 
-  public contactCohort(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.resourceService.contactCohort(this.currentCohort.constraint);
-    })
+  public contactCohort(cohort: Cohort, synopsis: string) {
+    this.resourceService.contactCohort(Number.parseInt(cohort.id), synopsis)
+      .subscribe((response: ContactResponse) => {
+        MessageHelper.alert(
+          'success',
+          `Contacted ${response.contactCount} patients out of ${response.totalCount}`,
+          '',
+        );
+        this.cohortToContact.contactResponse = response;
+      });
   }
 
   /**
@@ -155,11 +163,20 @@ export class CohortService {
             }
           );
       }
-      if (c.bookmarked) {
-        bookmarkedCohorts.push(c);
-      } else {
-        this.cohorts.push(c);
-      }
+      this.resourceService.getContactResponse(Number.parseInt(c.id))
+        .subscribe(
+          (response: ContactResponse) => {
+            c.contactResponse = response
+          },
+          null,
+          () => {
+            if (c.bookmarked) {
+              bookmarkedCohorts.push(c);
+            } else {
+              this.cohorts.push(c);
+            }
+          }
+        );
     });
     this.cohorts = [this.currentCohort].concat(bookmarkedCohorts).concat(this.cohorts);
   }
@@ -230,7 +247,7 @@ export class CohortService {
         (newlySaved: Cohort) => {
           newlySaved.collapsed = true;
           newlySaved.visible = true;
-
+          newlySaved.contactResponse = null;
           this.cohorts.push(newlySaved);
           this.isSavingCohortCompleted = true;
           const summary = 'Cohort "' + newlySaved.name + '" is added.';
@@ -488,4 +505,11 @@ export class CohortService {
     this._saveSubjectSetBeforeUpdatingCounts = value;
   }
 
+  get cohortToContact(): Cohort {
+    return this._cohortToContact;
+  }
+
+  set cohortToContact(value: Cohort) {
+    this._cohortToContact = value;
+  }
 }

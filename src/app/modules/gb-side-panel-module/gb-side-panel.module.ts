@@ -28,7 +28,8 @@ import {
   RadioButtonModule,
   SelectButtonModule,
   ToggleButtonModule,
-  TooltipModule
+  TooltipModule,
+  DialogModule
 } from 'primeng/primeng';
 import {FormsModule} from '@angular/forms';
 import {Md2AccordionModule} from 'md2';
@@ -64,7 +65,8 @@ import {GbTreeSearchComponent} from './accordion-components/gb-tree-search/gb-tr
     CheckboxModule,
     MatExpansionModule,
     SelectButtonModule,
-    GbGenericModule
+    GbGenericModule,
+    DialogModule,
   ],
   declarations: [
     GbSidePanelComponent,

@@ -40,6 +40,7 @@ import {Dimension} from '../models/constraint-models/dimension';
 import {TransmartDimension} from '../models/transmart-models/transmart-dimension';
 import {ServerStatus} from '../models/server-status';
 import { Concept } from 'app/models/constraint-models/concept';
+import { ContactResponse } from 'app/models/cohort-models/cohort-contact-response';
 
 @Injectable({
   providedIn: 'root',
@@ -302,8 +303,12 @@ export class ResourceService {
 
   // -------------------------------------- cohort calls --------------------------------------
 
-  contactCohort(constraint: Constraint): Observable<boolean> {
-    return this.transmartResourceService.contactCohort(constraint)
+  contactCohort(queryId: number, synopsis: string): Observable<ContactResponse> {
+    return this.transmartResourceService.contactCohort(queryId, synopsis);
+  }
+
+  getContactResponse(queryId: number): Observable<ContactResponse> {
+    return this.transmartResourceService.getContactResponse(queryId);
   }
 
   /**

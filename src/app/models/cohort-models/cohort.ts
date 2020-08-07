@@ -11,6 +11,7 @@ import {CohortDiffRecord} from './cohort-diff-record';
 import {Constraint} from '../constraint-models/constraint';
 import {FormatHelper} from '../../utilities/format-helper';
 import {CombinationConstraint} from '../constraint-models/combination-constraint';
+import { ContactResponse } from './cohort-contact-response';
 
 export class Cohort {
   private _id: string;
@@ -52,6 +53,8 @@ export class Cohort {
   private _numSubjects: number;
   // The historical records showing the differences between results of this query
   private _diffRecords: CohortDiffRecord[];
+  // The latest ContactResponse object. null if none exists
+  private _contactResponse: ContactResponse;
 
 
   constructor(id: string, name: string) {
@@ -67,6 +70,7 @@ export class Cohort {
     this.subscriptionFreq = CohortSubscriptionFrequency.WEEKLY;
     this.subscriptionCollapsed = true;
     this.diffRecords = [];
+    this.contactResponse = null;
   }
 
   get id(): string {
@@ -232,5 +236,13 @@ export class Cohort {
 
   set controlsEnabled(value: boolean) {
     this._controlsEnabled = value;
+  }
+
+  get contactResponse() {
+    return this._contactResponse
+  }
+
+  set contactResponse(value: ContactResponse) {
+    this._contactResponse = value
   }
 }

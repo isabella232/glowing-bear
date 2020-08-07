@@ -13,5 +13,9 @@
     "data-view": "dataTable"
   },
   "check-server-status": false,
-  "deny-access-to-users-without-role": false
+  "deny-access-to-users-without-role": false,
+  "api-url": "https://transmart.twins-project.org",
+  "gb-backend-url": "https://cohort.twins-project.org/gb",
+  "tree-node-counts-update": true,
+  "oidc-server-url": "https://auth.twins-project.org/realms/twins/protocol/openid-connect"
 }

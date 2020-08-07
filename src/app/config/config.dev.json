@@ -1,7 +1,7 @@
 {
-  "api-url": "https://transmart-dev.thehyve.net",
+  "api-url": "http://localhost:8081",
   "api-version": "v2",
-  "gb-backend-url": "https://gb-backend-dev.thehyve.net",
+  "gb-backend-url": "http://localhost:8083",
   "fractalis-url": "https://fractalis-dev.thehyve.net",
   "fractalis-datasource-url": "http://localhost:8080",
   "doc-url": "https://glowingbear.app",
@@ -11,7 +11,7 @@
   "instant-counts-update": false,
   "include-data-table": true,
   "include-cohort-subscription": true,
-  "oidc-server-url": "https://keycloak-dwh-test.thehyve.net/auth/realms/transmart-dev/protocol/openid-connect",
+  "oidc-server-url": "http://localhost:8080/auth/realms/dev/protocol/openid-connect",
   "oidc-client-id": "transmart-client",
   "export-mode": {
     "name": "transmart",

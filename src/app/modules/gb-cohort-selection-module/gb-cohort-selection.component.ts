@@ -115,28 +115,4 @@ export class GbCohortSelectionComponent implements OnInit {
     event.stopPropagation();
     this.cohortService.updateCountsWithCurrentCohort();
   }
-
-  async contact(event) {
-    // TODO: fetch the synopsis
-    const result = await this.cohortService.contactCohort();
-    if (result.previouslyContacted && result.contactCount === result.previousContactCount) {
-      MessageHelper.alert(
-        'error',
-        'You\'ve contacted all members of this cohort previously.',
-        '',
-        );
-      this.isContacting = false;
-      return;
-    }
-    MessageHelper.alert(
-      'info',
-      `Contacted ${result.contactCount - result.previousContactCount} new patients`,
-      '',
-    );
-    this.isContacting = false;
-  }
-
-  showContactModal(event) {
-    this.cohortService.isContacting = true;
-  }
 }

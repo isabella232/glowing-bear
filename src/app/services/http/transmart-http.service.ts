@@ -30,6 +30,7 @@ import {TransmartPatient} from '../../models/transmart-models/transmart-patient'
 import {TransmartDimension} from '../../models/transmart-models/transmart-dimension';
 import { Concept } from 'app/models/constraint-models/concept';
 import { Modifier } from 'app/models/constraint-models/modifier';
+import { ContactResponse } from 'app/models/cohort-models/cohort-contact-response';
 
 
 @Injectable({
@@ -464,10 +465,15 @@ export class TransmartHttpService {
   }
 
   // -------------------------------------- contact cohort --------------------------------------
-  contactCohort(constraint: Constraint): Observable<boolean> {
-    const urlPart = 'contact';
-    const body = {constraint: TransmartConstraintMapper.mapConstraint(constraint)};
+  contactCohort(queryId: number, synopsis: string): Observable<ContactResponse> {
+    const urlPart = `contact/${queryId}`
+    const body = { synopsis };
     return this.httpHelper.postCall(urlPart, body, null);
+  }
+
+  getContactResponse(queryId: number): Observable<ContactResponse> {
+    const urlPart = `contact/${queryId}`
+    return this.httpHelper.getCallWithoutErrorCatch(urlPart, null);
   }
 
 }
