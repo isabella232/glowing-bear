@@ -267,7 +267,7 @@ export class GbCohortsComponent implements OnInit {
   }
 
   set isContacting(val: boolean) {
-    this.cohortService.isContacting = false;
+    this.cohortService.isContacting = val;
   }
 
   get cohortToContact(): Cohort {
@@ -280,6 +280,7 @@ export class GbCohortsComponent implements OnInit {
 
   contact($event: Event) {
     $event.stopPropagation();
+    this.isContacting = true;
     this.cohortService.contactCohort(this.cohortToContact, this.contactSynopsis);
   }
 

@@ -186,11 +186,18 @@
   <p-dialog modal="true" header="Contact Cohort" [(visible)]="isContacting" [width]="600">
     <br>
     <div *ngIf="cohortToContact !== null && cohortToContact.contactResponse === null">
-      <textarea id="float-input" placeholder="Study Synopsis" pInputTextArea [(ngModel)]="contactSynopsis"></textarea>
+      <textarea id="float-input" placeholder="Please enter a short synopsis of your study. This would be sent to the cohort members" pInputTextArea [(ngModel)]="contactSynopsis"></textarea>
       <p-footer>
-        <button type="button" (click)="contact($event)" class="btn btn-outline-primary btn-sm">
-          Contact
-        </button>
+        <div *ngIf="!isContacting">
+          <button type="button" (click)="contact($event)" class="btn btn-outline-primary btn-sm">
+            Contact
+          </button>
+        </div>
+        <div *ngIf="isContacting">
+          <button type="button" disabled contact($event)" class="btn btn-outline-primary btn-sm">
+            Contact
+          </button>
+        </div>
       </p-footer>
     </div>
     <div *ngIf="cohortToContact !== null && cohortToContact.contactResponse !== null">

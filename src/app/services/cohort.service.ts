@@ -88,6 +88,7 @@ export class CohortService {
   public contactCohort(cohort: Cohort, synopsis: string) {
     this.resourceService.contactCohort(Number.parseInt(cohort.id), synopsis)
       .subscribe((response: ContactResponse) => {
+        this.isContacting = false;
         MessageHelper.alert(
           'success',
           `Contacted ${response.contactCount} patients out of ${response.totalCount}`,
