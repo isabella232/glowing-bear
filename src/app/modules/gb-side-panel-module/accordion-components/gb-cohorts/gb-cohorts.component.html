@@ -194,7 +194,7 @@
           </button>
         </div>
         <div *ngIf="isContacting">
-          <button type="button" disabled contact($event)" class="btn btn-outline-primary btn-sm">
+          <button type="button" disabled (click)="contact($event)" class="btn btn-outline-primary btn-sm">
             Contact
           </button>
         </div>
