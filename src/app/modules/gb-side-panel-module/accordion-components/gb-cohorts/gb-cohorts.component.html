@@ -183,7 +183,7 @@
       </md2-accordion-tab>
     </md2-accordion>
   </div>
-  <p-dialog modal="true" header="Contact Cohort" [(visible)]="isContacting" [width]="600">
+  <p-dialog modal="true" header="Contact Cohort" [(visible)]="displayContactModal" [width]="600">
     <br>
     <div *ngIf="cohortToContact !== null && cohortToContact.contactResponse === null">
       <textarea id="float-input" placeholder="Please enter a short synopsis of your study. This would be sent to the cohort members" pInputTextArea [(ngModel)]="contactSynopsis"></textarea>

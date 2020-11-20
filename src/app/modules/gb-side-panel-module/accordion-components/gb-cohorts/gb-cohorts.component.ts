@@ -35,6 +35,7 @@ export class GbCohortsComponent implements OnInit {
   isUploadListenerNotAdded: boolean;
   file: File; // holds the uploaded cohort file
   contactSynopsis: string;
+  displayContactModal: boolean;
 
   constructor(private cohortService: CohortService,
               private countService: CountService,
@@ -42,6 +43,7 @@ export class GbCohortsComponent implements OnInit {
               private confirmationService: ConfirmationService) {
     this.isUploadListenerNotAdded = true;
     this.contactSynopsis = '';
+    this.displayContactModal = false;
   }
 
   ngOnInit() {
@@ -287,6 +289,7 @@ export class GbCohortsComponent implements OnInit {
   showContactModal($event: Event, cohort) {
     $event.stopPropagation();
     $event.preventDefault();
+    this.displayContactModal = true;
     this.cohortService.isContacting = true;
     this.cohortToContact = cohort;
   }
